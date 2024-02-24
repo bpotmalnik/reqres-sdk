@@ -42,6 +42,7 @@
             "@composer validate --strict --ansi --no-interaction"
         ],
         "test": "vendor/bin/pest",
+        "test-update-snapshots": "vendor/bin/pest --update-snapshots",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
