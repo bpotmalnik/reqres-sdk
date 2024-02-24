@@ -45,7 +45,7 @@ foreach($users as $user) {
 
 This method will automatically handle pagination for you and
 return [Laravel Lazy collection](https://josephsilber.com/posts/2020/07/29/lazy-collections-in-laravel)
-for DX. It can be also iterated an as array.
+for good DX. It can be also iterated an as array.
 
 You can also specify how many users you want to get per page, how many pages you
 want to get and what page you want to start from. All of those parameters are
