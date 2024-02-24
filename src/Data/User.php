@@ -5,7 +5,7 @@ namespace Bpotmalnik\ReqresSdk\Data;
 readonly class User
 {
     public function __construct(
-        public int $id,
+        public ?string $id,
         public ?string $email = null,
         public ?string $first_name = null,
         public ?string $last_name = null,

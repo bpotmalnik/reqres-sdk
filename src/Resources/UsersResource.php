@@ -2,27 +2,37 @@
 
 namespace Bpotmalnik\ReqresSdk\Resources;
 
+use Bpotmalnik\ReqresSdk\Data\User;
 use Bpotmalnik\ReqresSdk\Requests\Users\CreateUser;
 use Bpotmalnik\ReqresSdk\Requests\Users\GetUser;
 use Bpotmalnik\ReqresSdk\Requests\Users\GetUsers;
+use Illuminate\Support\LazyCollection;
 use Saloon\Http\BaseResource;
-use Saloon\Http\Response;
-use Saloon\PaginationPlugin\PagedPaginator;
 
 class UsersResource extends BaseResource
 {
-    public function all(): PagedPaginator
-    {
-        return $this->connector->paginate(new GetUsers);
+    public function all(
+        ?int $perPage = null,
+        ?int $maxPages = null,
+        ?int $startPage = 1,
+    ): LazyCollection {
+        return $this->connector
+            ->paginate(new GetUsers)
+            ->setPerPageLimit($perPage)
+            ->setMaxPages($maxPages)
+            ->setStartPage($startPage)
+            ->collect();
     }
 
-    public function get(string $id): Response
+    public function get(string $id): User
     {
-        return $this->connector->send(new GetUser($id));
+        return $this->connector->send(new GetUser($id))
+            ->dto();
     }
 
-    public function create(string $name, string $job): Response
+    public function create(string $name, string $job): User
     {
-        return $this->connector->send(new CreateUser($name, $job));
+        return $this->connector->send(new CreateUser($name, $job))
+            ->dto();
     }
 }
