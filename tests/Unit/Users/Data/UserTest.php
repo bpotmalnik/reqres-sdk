@@ -39,3 +39,16 @@ it('can create user object from array', function () {
             'avatar' => 'https://google.com',
         ]);
 });
+
+it('is json serializable', function () {
+    $user = User::fromArray([
+        'id' => '1',
+        'email' => 'test@email.com',
+        'first_name' => 'Test',
+        'last_name' => 'User',
+        'avatar' => 'https://google.com',
+    ]);
+
+    expect(json_encode($user))
+        ->toBe('{"id":"1","email":"test@email.com","first_name":"Test","last_name":"User","avatar":"https:\/\/google.com"}');
+});
