@@ -7,23 +7,25 @@ use Saloon\Http\Faking\MockResponse;
 
 it('can get users', function () {
     $mockClient = new MockClient([
-        GetUsers::class => MockResponse::fixture('users'),
+        GetUsers::class => MockResponse::fixture('all-users'),
     ]);
 
-    $users = (new ReqresConnector)
+    $users = ReqresConnector::make()
         ->withMockClient($mockClient)
         ->users()
-        ->all();
+        ->all(
+            perPage: 6,
+            maxPages: 1
+        );
 
-    $users->setPerPageLimit(1);
-    $users->setMaxPages(1);
-
-    expect($users->collect()->first())
+    expect($users->first())
         ->toHaveProperties([
             'id' => 1,
             'email' => 'george.bluth@reqres.in',
             'first_name' => 'George',
             'last_name' => 'Bluth',
             'avatar' => 'https://reqres.in/img/faces/1-image.jpg',
-        ]);
+        ])
+        ->and($users)
+        ->toMatchSnapshot();
 });

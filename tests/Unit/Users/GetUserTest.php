@@ -10,15 +10,14 @@ it('can get user', function () {
         GetUser::class => MockResponse::fixture('user'),
     ]);
 
-    $user = (new ReqresConnector)
+    $user = ReqresConnector::make()
         ->withMockClient($mockClient)
         ->users()
-        ->get('1')
-        ->dto();
+        ->get('1');
 
     expect($user)
         ->toHaveProperties([
-            'id' => 1,
+            'id' => '1',
             'email' => 'george.bluth@reqres.in',
             'first_name' => 'George',
             'last_name' => 'Bluth',

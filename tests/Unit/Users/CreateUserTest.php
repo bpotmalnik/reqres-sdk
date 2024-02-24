@@ -10,14 +10,13 @@ it('can create user', function () {
         CreateUser::class => MockResponse::fixture('create-user'),
     ]);
 
-    $user = (new ReqresConnector)
+    $user = ReqresConnector::make()
         ->withMockClient($mockClient)
         ->users()
-        ->create('test name', 'test job')
-        ->dto();
+        ->create('test name', 'test job');
 
     expect($user)
         ->toHaveProperties([
-            'id' => 893,
+            'id' => '591',
         ]);
 });
