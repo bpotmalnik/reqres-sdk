@@ -1,18 +1,12 @@
-# SDK for reqres api
+# SDK for reqres API
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/bpotmalnik/reqres-sdk.svg?style=flat-square)](https://packagist.org/packages/bpotmalnik/reqres-sdk)
-[![Tests](https://img.shields.io/github/actions/workflow/status/bpotmalnik/reqres-sdk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/bpotmalnik/reqres-sdk/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/bpotmalnik/reqres-sdk.svg?style=flat-square)](https://packagist.org/packages/bpotmalnik/reqres-sdk)
+This is SDK for [reqres API](https://reqres.in/).
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+Available resources:
 
-## Support us
+- Users
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/reqres-sdk.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/reqres-sdk)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This package is using [saloon](https://docs.saloon.dev/) for handling requests.
 
 ## Installation
 
@@ -24,10 +18,115 @@ composer require bpotmalnik/reqres-sdk
 
 ## Usage
 
+### Getting users
+
+To get users you might use following method of users resource:
+
 ```php
-$skeleton = new Bpotmalnik\Reqres();
-echo $skeleton->echoPhrase('Hello, Bpotmalnik!');
+use Bpotmalnik\Reqres\ReqresConnector;
+use Illuminate\Support\LazyCollection;
+
+/** @var LazyCollection $users */
+$users = RequesConnector::make()
+    ->users()
+    ->all();
+
 ```
+
+This method will automatically handle pagination for you and
+return [Laravel Lazy collection](https://josephsilber.com/posts/2020/07/29/lazy-collections-in-laravel)
+
+You can also specify how many users you want to get and how many pages use you
+want and how many records per page.
+
+```php 
+use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\Reqres\Data\User;
+
+$users = RequesConnector::make()
+    ->users()
+    ->all(
+        perPage: 1,
+        maxPages: 1
+    );
+
+// it will get you one user from the first page
+$users->each(function(User $user){
+    // access to user data object
+});
+```
+
+### Getting single user
+
+To get a single user you might use following method of users resource:
+
+```php
+use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\Reqres\Data\User;
+
+/** @var User $user */
+$user = ReqresConnector::make()
+    ->users()
+    ->get(id: '1');
+```
+
+### Create a single user
+
+To create single user you can use following method of users resource:
+
+```php
+use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\Reqres\Data\User;
+
+/** @var User $user */
+$user = ReqresConnector::make()
+    ->users()
+    ->create(
+        name: 'test user',
+        job: 'test job'
+    );
+```
+
+### Accessing request data directly
+
+If you need access request data for more information you can skip using
+resources and manually execute
+requests:
+
+```php
+use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\ReqresSdk\Requests\Users\GetUsers;
+
+$users = ReqresConnector::make()
+    ->send(new GetUsers);
+```
+
+For more information what is available on request you can
+check [here](https://docs.saloon.dev/the-basics/responses)
+
+### Error handling
+
+Package will throw one of the following exceptions if there is an error:
+
+```
+SaloonException
+├── FatalRequestException (Connection Errors)
+└── RequestException (Request Errors)
+├── ServerException (5xx)
+│ ├── InternalServerErrorException (500)
+│ ├── ServiceUnavailableException (503)
+│ └── GatewayTimeoutException (504)
+└── ClientException (4xx)
+├── UnauthorizedException (401)
+├── ForbiddenException (403)
+├── NotFoundException (404)
+├── MethodNotAllowedException (405)
+├── RequestTimeOutException (408)
+├── UnprocessableEntityException (422)
+└── TooManyRequestsException (429)
+```
+
+More information [here](https://docs.saloon.dev/the-basics/handling-failures)
 
 ## Testing
 
@@ -35,17 +134,17 @@ echo $skeleton->echoPhrase('Hello, Bpotmalnik!');
 composer test
 ```
 
+Tests are using snapshot testing. If you want to update snapshots you can use
+following command:
+
+```bash
+composer test-update-snapshots
+```
+
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed
+recently.
 
 ## Credits
 
@@ -54,4 +153,5 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more
+information.

@@ -2,14 +2,18 @@
 
 namespace Bpotmalnik\ReqresSdk;
 
+use Bpotmalnik\ReqresSdk\Resources\UsersResource;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\PaginationPlugin\PagedPaginator;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 
 class ReqresConnector extends Connector implements HasPagination
 {
+    use AlwaysThrowOnErrors;
+
     public function resolveBaseUrl(): string
     {
         return 'https://reqres.in/api/';
@@ -18,8 +22,14 @@ class ReqresConnector extends Connector implements HasPagination
     public function defaultHeaders(): array
     {
         return [
+            'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
+    }
+
+    public function users(): UsersResource
+    {
+        return new UsersResource($this);
     }
 
     public function paginate(Request $request): PagedPaginator
@@ -33,11 +43,14 @@ class ReqresConnector extends Connector implements HasPagination
                     === $response->json('total_pages');
             }
 
-            protected function getPageItems(
-                Response $response,
-                Request $request
-            ): array {
-                return $response->json('data');
+            protected function getTotalPages(Response $response): int
+            {
+                return $response->json('total_pages');
+            }
+
+            protected function getPageItems(Response $response, Request $request): array
+            {
+                return $response->dto();
             }
         };
     }
