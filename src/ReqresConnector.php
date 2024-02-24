@@ -8,9 +8,12 @@ use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\PaginationPlugin\PagedPaginator;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 
 class ReqresConnector extends Connector implements HasPagination
 {
+    use AlwaysThrowOnErrors;
+
     public function resolveBaseUrl(): string
     {
         return 'https://reqres.in/api/';
