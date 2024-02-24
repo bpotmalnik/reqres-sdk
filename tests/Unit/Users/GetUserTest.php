@@ -18,7 +18,7 @@ it('can get user', function () {
     expect($user->dto())
         ->toHaveProperties([
             'id' => 1,
-            'email' => "george.bluth@reqres.in",
+            'email' => 'george.bluth@reqres.in',
             'first_name' => 'George',
             'last_name' => 'Bluth',
             'avatar' => 'https://reqres.in/img/faces/1-image.jpg',
