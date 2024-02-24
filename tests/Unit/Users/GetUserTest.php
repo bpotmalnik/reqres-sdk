@@ -13,12 +13,13 @@ it('can get user', function () {
     $user = (new ReqresConnector)
         ->withMockClient($mockClient)
         ->users()
-        ->get('1');
+        ->get('1')
+        ->dto();
 
-    expect($user->dto())
+    expect($user)
         ->toHaveProperties([
             'id' => 1,
-            'email' => "george.bluth@reqres.in",
+            'email' => 'george.bluth@reqres.in',
             'first_name' => 'George',
             'last_name' => 'Bluth',
             'avatar' => 'https://reqres.in/img/faces/1-image.jpg',
