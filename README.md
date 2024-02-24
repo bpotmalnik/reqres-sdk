@@ -31,13 +31,25 @@ $users = RequesConnector::make()
     ->users()
     ->all();
 
+$users->each(function(User $user){
+    // access to user data object
+});
+
+or 
+
+foreach($users as $user) {
+    // access to user data object
+}
+
 ```
 
 This method will automatically handle pagination for you and
 return [Laravel Lazy collection](https://josephsilber.com/posts/2020/07/29/lazy-collections-in-laravel)
+for DX. It can be also iterated an as array.
 
-You can also specify how many users you want to get and how many pages use you
-want and how many records per page.
+You can also specify how many users you want to get per page, how many pages you
+want to get and what page you want to start from. All of those parameters are
+optional as all method will handle pagination for you.
 
 ```php 
 use Bpotmalnik\Reqres\ReqresConnector;
@@ -46,8 +58,9 @@ use Bpotmalnik\Reqres\Data\User;
 $users = RequesConnector::make()
     ->users()
     ->all(
-        perPage: 1,
-        maxPages: 1
+        perPage: 1, // how many records per page
+        maxPages: 1, // how many pages you want to get
+        startPage: 1, // from which page you want to start
     );
 
 // it will get you one user from the first page
