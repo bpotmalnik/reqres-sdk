@@ -12,7 +12,8 @@
         {
             "name": "Bart Potmalnik",
             "email": "20015942+bpotmalnik@users.noreply.github.com",
-            "role": "Developer"
+            "role": "Developer",
+            "homepage": "https://bart.wtf"
         }
     ],
     "require": {
