@@ -34,7 +34,8 @@ class ReqresConnector extends Connector implements HasPagination
 
     public function paginate(Request $request): PagedPaginator
     {
-        return new class(connector: $this, request: $request) extends PagedPaginator {
+        return new class(connector: $this, request: $request) extends PagedPaginator
+        {
             protected function isLastPage(
                 Response $response
             ): bool {
