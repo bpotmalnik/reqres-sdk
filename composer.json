@@ -12,7 +12,8 @@
         {
             "name": "Bart Potmalnik",
             "email": "20015942+bpotmalnik@users.noreply.github.com",
-            "role": "Developer"
+            "role": "Developer",
+            "homepage": "https://bart.wtf"
         }
     ],
     "require": {
@@ -42,6 +43,7 @@
             "@composer validate --strict --ansi --no-interaction"
         ],
         "test": "vendor/bin/pest",
+        "test-update-snapshots": "vendor/bin/pest --update-snapshots",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
