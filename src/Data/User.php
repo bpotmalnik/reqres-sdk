@@ -2,7 +2,9 @@
 
 namespace Bpotmalnik\ReqresSdk\Data;
 
-readonly class User
+use JsonSerializable;
+
+readonly class User implements JsonSerializable
 {
     public function __construct(
         public ?string $id,
@@ -22,5 +24,21 @@ readonly class User
             last_name: $data['last_name'],
             avatar: $data['avatar']
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'avatar' => $this->avatar,
+        ];
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }
