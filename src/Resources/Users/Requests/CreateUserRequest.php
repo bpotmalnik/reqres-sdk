@@ -1,23 +1,23 @@
 <?php
 
-namespace Bpotmalnik\ReqresSdk\Requests\Users;
+namespace Bpotmalnik\ReqresSdk\Resources\Users\Requests;
 
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\CreateUser;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
-class CreateUser extends Request implements HasBody
+class CreateUserRequest extends Request implements HasBody
 {
     use HasJsonBody;
 
     protected Method $method = Method::POST;
 
     public function __construct(
-        public string $name,
-        public string $job
+        public CreateUser $createUser
     ) {
 
     }
@@ -30,8 +30,8 @@ class CreateUser extends Request implements HasBody
     protected function defaultBody(): array
     {
         return [
-            'name' => $this->name,
-            'job' => $this->job,
+            'name' => $this->createUser->name,
+            'job' => $this->createUser->job,
         ];
     }
 

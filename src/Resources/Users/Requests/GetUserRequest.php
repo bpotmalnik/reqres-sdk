@@ -1,13 +1,13 @@
 <?php
 
-namespace Bpotmalnik\ReqresSdk\Requests\Users;
+namespace Bpotmalnik\ReqresSdk\Resources\Users\Requests;
 
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-class GetUser extends Request
+class GetUserRequest extends Request
 {
     protected Method $method = Method::GET;
 

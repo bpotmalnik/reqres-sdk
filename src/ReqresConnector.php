@@ -2,7 +2,7 @@
 
 namespace Bpotmalnik\ReqresSdk;
 
-use Bpotmalnik\ReqresSdk\Resources\UsersResource;
+use Bpotmalnik\ReqresSdk\Resources\Users\UsersResource;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\Http\Response;

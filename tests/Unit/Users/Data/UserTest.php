@@ -1,6 +1,6 @@
 <?php
 
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 
 it('can create user object', function () {
     $user = new User(
