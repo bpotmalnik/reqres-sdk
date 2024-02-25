@@ -1,14 +1,14 @@
 <?php
 
-namespace Bpotmalnik\ReqresSdk\Requests\Users;
+namespace Bpotmalnik\ReqresSdk\Resources\Users\Requests;
 
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\Paginatable;
 
-class GetUsers extends Request implements Paginatable
+class GetUsersRequest extends Request implements Paginatable
 {
     protected Method $method = Method::GET;
 

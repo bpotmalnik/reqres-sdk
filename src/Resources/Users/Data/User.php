@@ -1,6 +1,6 @@
 <?php
 
-namespace Bpotmalnik\ReqresSdk\Data;
+namespace Bpotmalnik\ReqresSdk\Resources\Users\Data;
 
 use JsonSerializable;
 

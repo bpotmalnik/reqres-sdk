@@ -1,13 +1,13 @@
 <?php
 
 use Bpotmalnik\ReqresSdk\ReqresConnector;
-use Bpotmalnik\ReqresSdk\Requests\Users\GetUser;
+use Bpotmalnik\ReqresSdk\Resources\Users\Requests\GetUserRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 it('can get user', function () {
     $mockClient = new MockClient([
-        GetUser::class => MockResponse::fixture('user'),
+        GetUserRequest::class => MockResponse::fixture('user'),
     ]);
 
     $user = ReqresConnector::make()

@@ -1,19 +1,25 @@
 <?php
 
 use Bpotmalnik\ReqresSdk\ReqresConnector;
-use Bpotmalnik\ReqresSdk\Requests\Users\CreateUser;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\CreateUser;
+use Bpotmalnik\ReqresSdk\Resources\Users\Requests\CreateUserRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 it('can create user', function () {
     $mockClient = new MockClient([
-        CreateUser::class => MockResponse::fixture('create-user'),
+        CreateUserRequest::class => MockResponse::fixture('create-user'),
     ]);
 
     $user = ReqresConnector::make()
         ->withMockClient($mockClient)
         ->users()
-        ->create('test name', 'test job');
+        ->create(
+            new CreateUser(
+                name: 'test name',
+                job: 'test job'
+            )
+        );
 
     expect($user)
         ->toHaveProperties([

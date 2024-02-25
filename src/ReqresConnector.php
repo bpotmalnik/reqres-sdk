@@ -2,7 +2,7 @@
 
 namespace Bpotmalnik\ReqresSdk;
 
-use Bpotmalnik\ReqresSdk\Resources\UsersResource;
+use Bpotmalnik\ReqresSdk\Resources\Users\UsersResource;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -34,8 +34,7 @@ class ReqresConnector extends Connector implements HasPagination
 
     public function paginate(Request $request): PagedPaginator
     {
-        return new class(connector: $this, request: $request) extends PagedPaginator
-        {
+        return new class(connector: $this, request: $request) extends PagedPaginator {
             protected function isLastPage(
                 Response $response
             ): bool {
