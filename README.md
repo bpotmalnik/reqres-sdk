@@ -23,7 +23,7 @@ composer require bpotmalnik/reqres-sdk
 To get users you might use following method of users resource:
 
 ```php
-use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\ReqresSdk\ReqresConnector;
 use Illuminate\Support\LazyCollection;
 
 /** @var LazyCollection $users */
@@ -74,8 +74,8 @@ $users->each(function(User $user){
 To get a single user you might use following method of users resource:
 
 ```php
-use Bpotmalnik\Reqres\ReqresConnector;
-use Bpotmalnik\Reqres\Data\User;
+use Bpotmalnik\ReqresSdk\ReqresConnector;
+use Bpotmalnik\ReqresSdk\Data\User;
 
 /** @var User $user */
 $user = ReqresConnector::make()
@@ -88,8 +88,8 @@ $user = ReqresConnector::make()
 To create single user you can use following method of users resource:
 
 ```php
-use Bpotmalnik\Reqres\ReqresConnector;
-use Bpotmalnik\Reqres\Data\User;
+use Bpotmalnik\ReqresSdk\ReqresConnector;
+use Bpotmalnik\ReqresSdk\Data\User;
 
 /** @var User $user */
 $user = ReqresConnector::make()
@@ -107,7 +107,7 @@ resources and manually execute
 requests:
 
 ```php
-use Bpotmalnik\Reqres\ReqresConnector;
+use Bpotmalnik\ReqresSdk\ReqresConnector;
 use Bpotmalnik\ReqresSdk\Requests\Users\GetUsers;
 
 $users = ReqresConnector::make()
