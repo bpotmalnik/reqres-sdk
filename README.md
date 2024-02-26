@@ -1,6 +1,6 @@
-# SDK for reqres API
+# Reqres SDK
 
-This is SDK for [reqres API](https://reqres.in/).
+This is the SDK for the [reqres API](https://reqres.in/).
 
 Available resources:
 
