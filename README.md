@@ -27,7 +27,7 @@ use Bpotmalnik\ReqresSdk\ReqresConnector;
 use Illuminate\Support\LazyCollection;
 
 /** @var LazyCollection $users */
-$users = RequesConnector::make()
+$users = ReqresConnector::make()
     ->users()
     ->all();
 
@@ -40,7 +40,6 @@ or
 foreach($users as $user) {
     // access to user data object
 }
-
 ```
 
 This method will automatically handle pagination for you and
@@ -51,11 +50,11 @@ You can also specify how many users you want to get per page, how many pages you
 want to get and what page you want to start from. All of those parameters are
 optional as all method will handle pagination for you.
 
-```php 
+```php
 use Bpotmalnik\Reqres\ReqresConnector;
 use Bpotmalnik\Reqres\Data\User;
 
-$users = RequesConnector::make()
+$users = ReqresConnector::make()
     ->users()
     ->all(
         perPage: 1, // how many records per page
