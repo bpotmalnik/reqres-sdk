@@ -51,8 +51,8 @@ want to get and what page you want to start from. All of those parameters are
 optional as all method will handle pagination for you.
 
 ```php
-use Bpotmalnik\Reqres\ReqresConnector;
-use Bpotmalnik\Reqres\Data\User;
+use Bpotmalnik\ReqresSdk\ReqresConnector;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 
 $users = ReqresConnector::make()
     ->users()
@@ -74,7 +74,7 @@ To get a single user you might use following method of users resource:
 
 ```php
 use Bpotmalnik\ReqresSdk\ReqresConnector;
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
 
 /** @var User $user */
 $user = ReqresConnector::make()
@@ -88,14 +88,17 @@ To create single user you can use following method of users resource:
 
 ```php
 use Bpotmalnik\ReqresSdk\ReqresConnector;
-use Bpotmalnik\ReqresSdk\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\User;
+use Bpotmalnik\ReqresSdk\Resources\Users\Data\CreateUser;
 
 /** @var User $user */
 $user = ReqresConnector::make()
     ->users()
     ->create(
-        name: 'test user',
-        job: 'test job'
+        new CreateUser(
+            name: 'morpheus',
+            job: 'leader'
+        )
     );
 ```
 
@@ -107,10 +110,10 @@ requests:
 
 ```php
 use Bpotmalnik\ReqresSdk\ReqresConnector;
-use Bpotmalnik\ReqresSdk\Requests\Users\GetUsers;
+use Bpotmalnik\ReqresSdk\Resources\Users\Requests\GetUsersRequest;
 
 $users = ReqresConnector::make()
-    ->send(new GetUsers);
+    ->send(new GetUsersRequest);
 ```
 
 For more information what is available on request you can
