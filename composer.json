@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.2",
         "ext-json": "*",
-        "illuminate/collections": "^10.0",
+        "illuminate/collections": "^10.0 || ^11.0",
         "saloonphp/pagination-plugin": "^2.2",
         "saloonphp/saloon": "^3.6"
     },
